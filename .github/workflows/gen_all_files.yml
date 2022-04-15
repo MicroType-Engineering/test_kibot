@@ -4,7 +4,7 @@
 
 # To use this workflow in your own repo you need to edit the environment variables in the env: section
 # below.
-name: "KiBot - All Files"
+name: "KiBot - Generate All Files"
 
 on:
   release:
@@ -94,7 +94,7 @@ jobs:
       # Zip all the documentation. Any files in the BOM, PDFs, and Renders subfolder
       # are automatically included.
       - name: Zip documentation
-        run: zip -qq -r "../${{ github.event.repository.name }}_${{ github.event.inputs.version }}_${{ steps.date.outputs.date }}.zip" PCB-Files Schematic-Files
+        run: zip -qq -r "../${{ github.event.repository.name }}_${{ steps.get_github_version.outputs.version }}_${{ steps.date.outputs.date }}.zip" PCB-Files Schematic-Files
         working-directory: ${{ env.OutputFolder }}
 
       # Upload all the zip files to the release.
