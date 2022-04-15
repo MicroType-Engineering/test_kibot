@@ -56,7 +56,6 @@ jobs:
       - name: Change lib paths
         uses: jacobtomlinson/gha-find-replace@master
         with:
-          include: kicad_proj/${{ github.event.repository.name }}/${{ github.event.repository.name }}.kicad_pcb
           find: ${MTE_LIB_DIR}
           replace: MTE_LIB_DIR
           regex: false
