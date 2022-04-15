@@ -34,8 +34,7 @@ jobs:
         id: date
         run: echo "::set-output name=date::$(TZ='${{ env.Timezone }}' date +'%Y-%m-%d')"
 
-      # Get the version of the GitHub release for use later. This is only valid
-      # when run in a release context
+      # Get the version of the GitHub release for use later when run in a release context
       - name: Get GitHub release version
         id: get_github_version
         uses: battila7/get-version-action@v2
