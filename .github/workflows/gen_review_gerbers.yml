@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: MicroType-Engineering/kibot_files
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.KiBot_Secret }}
           path: './kibot_files'
 
       # Run KiBot
