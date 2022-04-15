@@ -1,0 +1,44 @@
+name: "KiBot - Generate Review Gerbers"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Design version"
+        required: true
+        default: "gerb-review"
+
+jobs:
+  Documentation:
+    env:
+      # Set this to your local timezone. See https://www.wikiwand.com/en/List_of_tz_database_time_zones for valid strings.
+      Timezone: America/New_York
+      # Set this to the output folder for all of the generated files. Unless you have a very
+      # good reason to change this you should leave it as KiBotOutput.
+      OutputFolder: KiBotOutput
+    runs-on: ubuntu-latest
+
+    # These are all the steps that generate the files.
+    steps:
+      - uses: actions/checkout@v2
+
+      # Get the current date in the timezone specified above, for use later.
+      - name: Get current date and time
+        id: date
+        run: echo "::set-output name=date::$(TZ='${{ env.Timezone }}' date +'%Y-%m-%d')"
+
+      # Run KiBot
+      - name: Generate documentation
+        uses: INTI-CMNB/KiBot@v1_k6
+        with:
+          config: .kibot/includes/pcb/gerbers.kibot.yaml
+          dir: ${{ env.OutputFolder }}
+          schema: kicad_proj/${{ github.event.repository.name }}.kicad_sch
+          board: kicad_proj/${{ github.event.repository.name }}.kicad_pcb
+
+      # Archive all the artifacts from output and attach to the action's results.
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.event.repository.name }}_${{ github.event.inputs.version }}_${{ steps.date.outputs.date }}
+          path: ${{ env.OutputFolder }}/**

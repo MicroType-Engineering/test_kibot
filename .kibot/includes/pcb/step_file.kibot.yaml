@@ -1,0 +1,17 @@
+# This KiBot script generates gerbers, drill, bom, and position files for submitting
+# two layer boards to PCBWay.
+kibot:
+  version: 1
+
+global:
+  # Sets the default output filename for all generated files. You likely don't have to change this.
+  output: "%i.%x"
+
+outputs:
+  - name: step
+    comment: "Renders - 3D model (STEP)"
+    type: step
+    dir: "Renders"
+    options:
+      metric_units: true
+      origin: 85,66.2
