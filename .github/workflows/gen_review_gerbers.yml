@@ -27,11 +27,19 @@ jobs:
         id: date
         run: echo "::set-output name=date::$(TZ='${{ env.Timezone }}' date +'%Y-%m-%d')"
 
+      # Pulls MTE kibot_files from Github for use with Kibot
+      - name: Pull kibot_files
+        uses: actions/checkout@master
+        with:
+          repository: MicroType-Engineering/kibot_files
+          token: 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
+          path: './kibot_files'
+
       # Run KiBot
       - name: Generate documentation
         uses: INTI-CMNB/KiBot@v1_k6
         with:
-          config: .kibot/includes/pcb/gerbers.kibot.yaml
+          config: kibot_files/gerbers.kibot.yaml
           dir: ${{ env.OutputFolder }}
           schema: kicad_proj/${{ github.event.repository.name }}.kicad_sch
           board: kicad_proj/${{ github.event.repository.name }}.kicad_pcb
