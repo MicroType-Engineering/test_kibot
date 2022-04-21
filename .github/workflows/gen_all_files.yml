@@ -67,7 +67,7 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: MicroType-Engineering/kicad-libs
-          token: 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
+          token: ${{ secrets.KiBot_Secret }}
           path: './MTE_LIB_DIR'
 
       # Pulls MTE kibot_files from Github for use with Kibot
