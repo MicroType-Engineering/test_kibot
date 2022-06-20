@@ -55,7 +55,7 @@ jobs:
 
       # Run KiBot to generate all the files.
       - name: Generate schematic outputs
-        uses: MicroType-Engineering/KiBot@stable
+        uses: MicroType-Engineering/KiBot@v2_k6
         with:
           config: kibot_files/schematic-files.kibot.yaml
           dir: ${{ env.OutputFolder }}
