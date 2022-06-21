@@ -78,7 +78,7 @@ jobs:
 
       # Run KiBot to generate all the files.
       - name: Generate pcb outputs
-        uses: setsoft/kicad_auto:ki6
+        uses: INTI-CMNB/KiBot@v2_k6
         with:
           config: kibot_files/pcb-files.kibot.yaml
           dir: ${{ env.OutputFolder }}
