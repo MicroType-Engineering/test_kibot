@@ -80,7 +80,7 @@ jobs:
 
       # Actually run KiBot to generate all the files.
       - name: Generate documentation and fabrication files
-        uses: INTI-CMNB/KiBot@v1_k6
+        uses: setsoft/kicad_auto:ki6
         with:
           config: kibot_files/all_files.kibot.yaml
           dir: ${{ env.OutputFolder }}
